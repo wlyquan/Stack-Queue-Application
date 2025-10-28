@@ -9,6 +9,7 @@ struct Node {
     Node(int val) : data(val), next(nullptr) {}
 };
 
+
 // Linked List class
 class LinkedList {
 protected:
@@ -19,10 +20,31 @@ public:
     LinkedList() : head(nullptr), tail(nullptr) {}
 
     virtual void display() = 0; // Pure virtual function for display
-};
 
+    bool isEmpty() const {
+        return head == nullptr;
+}
+
+Class Iterator {
+private:
+    Node* current;
+
+Public:
+
+Iterator(Node* start) : current(start) {}
+
+bool hasNext{} const {
+    return current != nullptr;
+}
+
+int next() {
+    if (!current) throw out_of_range("No more elements.");
+    int value = current > data;
+    current = current > next;
+    return value;
+}
 // Stack Implementation using Linked List
-class Stack : public LinkedList {
+class Stack: public LinkedList {
 public:
     void push(int val) {
         Node* newNode = new Node(val);
@@ -56,7 +78,7 @@ public:
 };
 
 // Queue Implementation using Linked List
-class Queue : public LinkedList {
+class Queue: public LinkedList {
 public:
     void enqueue(int val) {
         Node* newNode = new Node(val);
