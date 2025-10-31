@@ -1,16 +1,16 @@
 #include <iostream>
+#include <stdexcept>
 using namespace std;
 
 // Node structure for the linked list
 struct Node {
     int data;
     Node* next;
-    
+
     Node(int val) : data(val), next(nullptr) {}
 };
 
-
-// Linked List class
+// Base Linked List class
 class LinkedList {
 protected:
     Node* head;
@@ -18,33 +18,23 @@ protected:
 
 public:
     LinkedList() : head(nullptr), tail(nullptr) {}
+    virtual ~LinkedList() {
+        while (head) {
+            Node* temp = head;
+            head = head->next;
+            delete temp;
+        }
+    }
 
-    virtual void display() = 0; // Pure virtual function for display
+    virtual void display() = 0; // Pure virtual function
 
     bool isEmpty() const {
         return head == nullptr;
-}
+    }
+};
 
-Class Iterator {
-private:
-    Node* current;
-
-Public:
-
-Iterator(Node* start) : current(start) {}
-
-bool hasNext{} const {
-    return current != nullptr;
-}
-
-int next() {
-    if (!current) throw out_of_range("No more elements.");
-    int value = current > data;
-    current = current > next;
-    return value;
-}
 // Stack Implementation using Linked List
-class Stack: public LinkedList {
+class Stack : public LinkedList {
 public:
     void push(int val) {
         Node* newNode = new Node(val);
@@ -78,7 +68,7 @@ public:
 };
 
 // Queue Implementation using Linked List
-class Queue: public LinkedList {
+class Queue : public LinkedList {
 public:
     void enqueue(int val) {
         Node* newNode = new Node(val);
@@ -114,14 +104,15 @@ public:
     }
 };
 
-// Custom iterator to traverse the list
+// Custom iterator for traversing linked lists
 class Iterator {
 private:
     Node* current;
+
 public:
     Iterator(Node* start) : current(start) {}
 
-    bool hasNext() {
+    bool hasNext() const {
         return current != nullptr;
     }
 
@@ -133,6 +124,7 @@ public:
     }
 };
 
+// Main function to test Stack and Queue
 int main() {
     Stack stack;
     Queue queue;
