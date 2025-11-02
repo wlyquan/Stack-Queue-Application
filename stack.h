@@ -1,7 +1,5 @@
 //stack.h
 #include <iostream>
-#include <queue>
-#include <string>
 #include "linkedList.h"
 
 #ifndef STACK_H
