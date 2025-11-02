@@ -19,7 +19,7 @@ class Stack : public LinkedList {
 		}
 		
 		void pop() {
-			if(!head) {
+			if(isEmpty()) {
 				cout << "Stack is empty\n";
 				return;
 			}
@@ -29,7 +29,15 @@ class Stack : public LinkedList {
 			delete temp;
 			if (!head) tail = nullptr;
 		}
+
+void display() override{
+	Node* temp = head;
+	cout << "The stack is: ";
+	while (temp) {
+		cout << temp->data << "";
+		temp = temp->next;
+	}
+	cout << endl;
 };
-	
-	
+		
 #endif
